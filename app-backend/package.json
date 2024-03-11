@@ -1,0 +1,16 @@
+{
+  "name": "fin-app",
+  "version": "1.0.0",
+  "description": "A centralized finance app to keep track of personal financial data, habits and insights.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.3"
+  }
+}

@@ -1,0 +1,24 @@
+.widget {
+  background-color: white; /* Background color for the widget */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* A subtle shadow */
+  margin: 20px; /* Space around the widget */
+  padding: 20px; /* Space inside the widget */
+}
+
+.widget-header {
+  font-size: 24px; /* Large font size for the header */
+  margin-bottom: 20px; /* Space below the header */
+  color: #333; /* Dark font color for contrast */
+}
+
+.widget-content {
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Space out content */
+  align-items: center; /* Align items vertically */
+}
+
+.widget-left,
+.widget-right {
+  flex-basis: 48%; /* Allocate almost half of the space to each */
+}

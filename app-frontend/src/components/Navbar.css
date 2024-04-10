@@ -1,0 +1,24 @@
+.navbar {
+  height: 100vh; /* Full-height: Make sure to cover the entire viewport */
+  width: 200px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #202020; /* Dark background */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+}
+
+.navbar a {
+  padding: 6px 8px 6px 16px; /* Padding inside the navigation links */
+  text-decoration: none; /* Remove default link styling */
+  font-size: 22px; /* Increase font size */
+  color: white; /* White text color */
+  display: block; /* Make it a block element to fill the whole space */
+  margin-bottom: 8px; /* Adds space after each link */
+}
+
+.navbar a:hover {
+  background-color: #575757; /* Add a hover effect */
+}

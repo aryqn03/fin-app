@@ -1,14 +1,46 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
-import Widget from "./components/Widget"; // Import the Widget component
+import Widget from "./components/Widget";
 import Transactions from "./pages/Transactions";
 import Bills from "./pages/Bills";
 import Settings from "./pages/Settings";
 
 function App() {
   const [data, setData] = React.useState(null);
+  const [accessToken, setAccessToken] = React.useState(null);
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://cdn.teller.io/connect/connect.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    script.onload = () => {
+      const tellerConnect = window.TellerConnect.setup({
+        applicationId: "app_ot4d8np141gtjn2irq000",
+        onInit: () => console.log("Teller Connect has initialized"),
+        onSuccess: (enrollment) => {
+          console.log("User enrolled successfully", enrollment.accessToken);
+          setAccessToken(enrollment.accessToken); // Save access token to state
+        },
+        onExit: () => console.log("User closed Teller Connect"),
+        onFailure: (error) => console.error("Error: ", error.message),
+      });
+
+      // Attach an event listener to a button that opens Teller Connect
+      document
+        .getElementById("teller-connect-btn")
+        .addEventListener("click", () => {
+          tellerConnect.open();
+        });
+    };
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   React.useEffect(() => {
     fetch("/api")
@@ -28,8 +60,10 @@ function App() {
                 <>
                   <header className="App-header">
                     <p>{!data ? "Loading..." : data}</p>
+                    <button id="teller-connect-btn">
+                      Connect to your bank
+                    </button>
                   </header>
-                  {/* Add the Widget component below the header */}
                   <Widget
                     title="Accounts"
                     leftContent="Checking Account"

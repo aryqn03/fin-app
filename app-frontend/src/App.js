@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
@@ -6,10 +6,13 @@ import Widget from "./components/Widget";
 import Transactions from "./pages/Transactions";
 import Bills from "./pages/Bills";
 import Settings from "./pages/Settings";
+import Accounts from './components/Accounts';  // Import the Accounts component
+
 
 function App() {
-  const [data, setData] = React.useState(null);
-  const [accessToken, setAccessToken] = React.useState(null);
+  const [data, setData] = useState(null);
+  const [accessToken, setAccessToken] = useState(null);
+
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -42,40 +45,33 @@ function App() {
     };
   }, []);
 
-  React.useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
 
   return (
     <Router>
       <div className="App">
         <Navbar />
         <div className="main-content">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <header className="App-header">
-                    <p>{!data ? "Loading..." : data}</p>
-                    <button id="teller-connect-btn">
-                      Connect to your bank
-                    </button>
-                  </header>
-                  <Widget
-                    title="Accounts"
-                    leftContent="Checking Account"
-                    rightContent="Savings Account"
-                  />
-                </>
-              }
-            />
-            <Route path="/transactions" element={<Transactions />} />
-            <Route path="/bills" element={<Bills />} />
-            <Route path="/settings" element={<Settings />} />
-          </Routes>
+        <Routes>
+          <Route path="/" element={
+            <>
+              <header className="App-header">
+                <p>{!data ? "Loading..." : data}</p>
+                <button id="teller-connect-btn">
+                  Connect to your bank
+                </button>
+              </header>
+              <Widget
+                title="Accounts"
+                leftContent="Checking Account"
+                rightContent="Savings Account"
+              />
+              {accessToken && <Accounts accessToken={accessToken} />}
+            </>
+          } />
+          <Route path="/transactions" element={<Transactions />} />
+          <Route path="/bills" element={<Bills />} />
+          <Route path="/settings" element={<Settings />} />
+        </Routes>
         </div>
       </div>
     </Router>

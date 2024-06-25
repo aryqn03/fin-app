@@ -29,7 +29,7 @@ const Accounts = ({ accessToken }) => {
     <div>
       <h1>Accounts Information</h1>
       {accounts.length ? accounts.map(account => (
-        <p key={account.id}>{account.name} - Balance: {account.balance}</p>
+        <p key={account.id}>{account.name} - Balance: {account.id}</p>
       )) : <p>No accounts found or loading...</p>}
     </div>
   );

@@ -57,9 +57,22 @@ const Transactions = ({ accessToken }) => {
   return (
     <div>
       <h1>Transactions</h1>
-      <p>Transactions: {JSON.stringify(transactions)} </p>
+      <p>Sample Transaction: {JSON.stringify(transactions[0])} </p>
+      <ul>
+        {transactions.map((transaction, index) => (
+          <li key={index} style={{ marginBottom: '20px' }}>
+            <strong>Type:</strong> {transaction.type} <br />
+            <strong>Description:</strong> {transaction.description} <br />
+            <strong>Amount:</strong> {transaction.amount} <br />
+            {/* <strong>Status:</strong> {transaction.status} <br /> */}
+            <strong>Running Balance:</strong> {transaction.running_balance} <br />
+            <strong>Processing Status:</strong> {transaction.details.processing_status} <br />
+            <strong>Counterparty:</strong> {transaction.details.counterparty?.name} <br />
+            <strong>Date:</strong> {transaction.date} <br />
+          </li>
+        ))}
+      </ul>
       <p>AccessTokenski: {accessToken}</p>
-      <p>Accounts: {JSON.stringify(accounts)}</p>
     </div>
   );
 };

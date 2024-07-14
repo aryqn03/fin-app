@@ -29,7 +29,8 @@ const Accounts = ({ accessToken }) => {
     <div>
       <h1>Accounts Information</h1>
       {accounts.length ? accounts.map(account => (
-        <p key={account.id}>{account.name} - Balance: {account.id}</p>
+        <p key={account.id}>{account.name} - Balance: {account.links.balances}</p>
+        // need to do another fetch function for the balances called fetchBalances
       )) : <p>No accounts found or loading...</p>}
     </div>
   );

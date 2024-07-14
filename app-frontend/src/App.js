@@ -6,7 +6,7 @@ import Widget from "./components/Widget";
 import Transactions from "./pages/Transactions";
 import Bills from "./pages/Bills";
 import Settings from "./pages/Settings";
-import Accounts from './components/Accounts';  // Import the Accounts component
+import Accounts from './pages/Accounts';  // Import the Accounts component
 import { ACCESS_TOKEN_KEY, APP_CONFIG } from './config/constants';
 
 function App() {
